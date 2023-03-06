@@ -1,0 +1,20 @@
+Network-based firewalls are positioned between two or more networks, typically between the local area network (LAN) and wide area network (WAN).
+Host-based firewalls are deployed directly on the host itself to control network traffic or other computing resources.
+Firewall policy configuration is based on specific network type (e.g., public or private), and can be set up using firewall rules that either block or allow access to prevent potential attacks from hackers or malware.
+Setting up a firewall is a complex and error-prone task.
+The first reported type of network firewall is called a packet filter, which inspects packets transferred between computers.
+The firewall maintains an access control list which dictates what packets will be looked at and what action should be applied, if any, with the default action set to silent discard.
+Firewalls are categorized as a network-based or a host-based system.
+They are either a software appliance running on general-purpose hardware, a hardware appliance running on special-purpose hardware, or a virtual appliance running on a virtual host controlled by a hypervisor.
+In computing, a firewall is a network security system that monitors and controls incoming and outgoing network traffic based on predetermined security rules.
+A firewall typically establishes a barrier between a trusted network and an untrusted network, such as the Internet.
+An intrusion detection system (IDS; also intrusion prevention system or IPS) is a device or software application that monitors a network or systems for malicious activity or policy violations.
+Any intrusion activity or violation is typically reported either to an administrator or collected centrally using a security information and event management (SIEM) system.
+The most common classifications are network intrusion detection systems (NIDS) and host-based intrusion detection systems (HIDS).
+A system that monitors important operating system files is an example of an HIDS, while a system that analyzes incoming network traffic is an example of an NIDS.
+Although they both relate to network security, an IDS differs from a firewall in that a traditional network firewall (distinct from a Next-Generation Firewall) uses a static set of rules to permit or deny network connections.
+Network intrusion detection systems (NIDS) are placed at a strategic point or points within the network to monitor traffic to and from all devices on the network.
+It performs an analysis of passing traffic on the entire subnet, and matches the traffic that is passed on the subnets to the library of known attacks.
+Once an attack is identified, or abnormal behavior is sensed, the alert can be sent to the administrator.
+An example of an NIDS would be installing it on the subnet where firewalls are located in order to see if someone is trying to break into the firewall.
+Ideally one would scan all inbound and outbound traffic, however doing so might create a bottleneck that would impair the overall speed of the network.

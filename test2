@@ -1,0 +1,10 @@
+import pickle
+import numpy as np
+import networkx as nx
+import matplotlib.pyplot as plt
+file = r"C:\Users\Oblivion\Downloads\data_ontology.pickle"
+with open(file, "rb") as f:
+    G = pickle.load(f)
+for n in G:
+    print(n)
+print(nx.dfs_successors(G,"information"))
