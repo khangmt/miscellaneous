@@ -3,8 +3,12 @@ example = {'id': '0',
  'ner_tags': [3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 8, 8, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0],
  'tokens': ['admin@33', 'It', "'s", 'the', 'view', 'from', 'where', 'I', "'m", 'living', 'for', 'two', 'weeks', '.', 'Empire', 'State', 'Building', '=', 'ESB', '.', 'Pretty', 'bad', 'storm', 'here', 'last', 'evening', '.']
 }
+example2 = {'id': '0',
+ 'ner_tags': ['B-PER','O','O','O', 'O', 'B-Appliance','I-Appliance'],
+ 'tokens': ['admin@33', 'has', 'installed', 'the', 'new', 'network-based', 'firewall.']
+}
 from transformers import AutoTokenizer
-tokenizer = AutoTokenizer.from_pretrained("distilbert-base-uncased")
+tokenizer = AutoTokenizer.from_pretrained("jackaduma/SecBERT")
 
 def tokenize_and_align_labels(examples):
     tokenized_inputs = tokenizer(examples["tokens"], truncation=True, padding=True, max_length= 512, is_split_into_words=True)
@@ -26,7 +30,7 @@ def tokenize_and_align_labels(examples):
     tokenized_inputs["labels"] = label_ids
     return tokenized_inputs
 
-features = tokenize_and_align_labels(examples= example)
+features = tokenize_and_align_labels(examples= example2)
 tokens = tokenizer.convert_ids_to_tokens(features["input_ids"])
 print(tokens)
 print(features["labels"])

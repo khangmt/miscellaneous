@@ -1,10 +1,15 @@
-import pickle
-import numpy as np
-import networkx as nx
-import matplotlib.pyplot as plt
-file = r"C:\Users\Oblivion\Downloads\data_ontology.pickle"
-with open(file, "rb") as f:
-    G = pickle.load(f)
-for n in G:
-    print(n)
-print(nx.dfs_successors(G,"information"))
+#%%
+import spacy
+from spacy import displacy
+nlp = spacy.load("en_core_web_sm")
+
+
+#%%
+sent = "we can ensure to take care of people by the correct application developers."
+doc = nlp(sent)
+for tok in doc:
+    print(tok.i, tok, tok.pos_, tok.dep_, tok.head.i, sep="\t")
+displacy.serve(doc, style="dep")
+# %%
+print(spacy.explain("xcomp"))
+# %%
