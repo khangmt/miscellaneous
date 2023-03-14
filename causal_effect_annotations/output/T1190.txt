@@ -1,0 +1,7 @@
+Adversaries may attempt to take advantage of a weakness in an Internet-facing computer or program using software, data, or commands in order to cause unintended or unanticipated behavior.
+The weakness in the system can be a bug, a glitch, or a design vulnerability.
+These applications are often websites, but can include databases , standard services , network device administration and management protocols , and any other applications with Internet accessible open sockets, such as web servers and related services.
+Depending on the flaw being exploited this may include Exploitation for Defense Evasion.
+If an application is hosted on cloud-based infrastructure and/or is containerized, then exploiting it may lead to compromise of the underlying instance or container.
+This can allow an adversary a path to access the cloud or container APIs, exploit container host access via Escape to Host, or take advantage of weak identity and access management policies.
+For websites and databases, the OWASP top 10 and CWE top 25 highlight the most common web-based vulnerabilities.

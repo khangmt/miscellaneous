@@ -1,0 +1,7 @@
+Adversaries may attempt to position themselves between two or more networked devices using an adversary-in-the-middle  technique to support follow-on behaviors such as Network Sniffing or Transmitted Data Manipulation.
+By abusing features of common networking protocols that can determine the flow of network traffic , adversaries may force a device to communicate through an adversary controlled system so they can collect information or perform additional actions.
+For example, adversaries may manipulate victim DNS settings to enable other malicious activities such as preventing/redirecting users from accessing legitimate sites and/or pushing additional malware.
+Adversaries may also manipulate DNS and leverage their position in order to intercept user credentials and session cookies.
+Downgrade Attacks can also be used to establish an AiTM position, such as by negotiating a less secure, deprecated, or weaker version of communication protocol  or encryption algorithm.
+Adversaries may also leverage the AiTM position to attempt to monitor and/or modify traffic, such as in Transmitted Data Manipulation.
+Adversaries can setup a position similar to AiTM to prevent traffic from flowing to the appropriate destination, potentially to Impair Defenses and/or in support of a Network Denial of Service.

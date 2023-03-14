@@ -1,0 +1,389 @@
+Adversaries may attempt to position themselves between two or more networked devices using an adversary-in-the-middle  technique to support follow-on behaviors such as Network Sniffing or Transmitted Data Manipulation.
+By abusing features of common networking protocols that can determine the flow of network traffic , adversaries may force a device to communicate through an adversary controlled system so they can collect information or perform additional actions.
+For example, adversaries may manipulate victim DNS settings to enable other malicious activities such as preventing/redirecting users from accessing legitimate sites and/or pushing additional malware.
+Adversaries may also manipulate DNS and leverage their position in order to intercept user credentials and session cookies.
+Downgrade Attacks can also be used to establish an AiTM position, such as by negotiating a less secure, deprecated, or weaker version of communication protocol  or encryption algorithm.
+Adversaries may also leverage the AiTM position to attempt to monitor and/or modify traffic, such as in Transmitted Data Manipulation.
+Adversaries can setup a position similar to AiTM to prevent traffic from flowing to the appropriate destination, potentially to Impair Defenses and/or in support of a Network Denial of Service.
+Adversaries may log user keystrokes to intercept credentials as the user types them.
+Keylogging is likely to be used to acquire credentials for new access opportunities when OS Credential Dumping efforts are not effective, and may require an adversary to intercept keystrokes on a system for a substantial period of time before credentials can be successfully captured.
+Keylogging is the most prevalent type of input capture, with many different ways of intercepting keystrokes.
+Some methods include:
+
+* Hooking API callbacks used for processing keystrokes.
+Unlike Credential API Hooking, this focuses solely on API functions intended for processing keystroke data.
+* Reading raw keystroke data from the hardware buffer.
+* Windows Registry modifications.
+* Custom drivers.
+* Modify System Image may provide adversaries with hooks into the operating system of network devices to read raw keystrokes for login sessions.
+Adversaries with no prior knowledge of legitimate credentials within the system or environment may guess passwords to attempt access to accounts.
+Without knowledge of the password for an account, an adversary may opt to systematically guess the password using a repetitive or iterative mechanism.
+An adversary may guess login credentials without prior knowledge of system or environment passwords during an operation by using a list of common passwords.
+Password guessing may or may not take into account the target's policies on password complexity or use policies that may lock accounts out after a number of failed attempts.
+Guessing passwords can be a risky option because it could cause numerous authentication failures and account lockouts, depending on the organization's login failure policies.
+Typically, management services over commonly used ports are used when guessing passwords.
+Commonly targeted services include the following:
+
+* SSH 
+* Telnet 
+* FTP 
+* NetBIOS / SMB / Samba 
+* LDAP 
+* Kerberos 
+* RDP / Terminal Services 
+* HTTP/HTTP Management Services 
+* MSSQL 
+* Oracle 
+* MySQL 
+* VNC 
+* SNMP 
+
+In addition to management services, adversaries may "target single sign-on  and cloud-based applications utilizing federated authentication protocols," as well as externally facing email applications, such as Office 365..
+Further, adversaries may abuse network device interfaces  to brute force accessible wifi-router via wireless authentication protocols.
+In default environments, LDAP and Kerberos connection attempts are less likely to trigger events over SMB, which creates Windows "logon failure" event ID 4625.
+Adversaries may collect data related to managed devices from configuration repositories.
+Configuration repositories are used by management systems in order to configure, manage, and control data on remote systems.
+Configuration repositories may also facilitate remote access and administration of devices.
+Adversaries may target these repositories in order to collect large quantities of sensitive system administration data.
+Data from configuration repositories may be exposed by various protocols and software and can store a wide variety of data, much of which may align with adversary Discovery objectives.
+Adversaries may use password cracking to attempt to recover usable credentials, such as plaintext passwords, when credential material such as password hashes are obtained.
+OS Credential Dumping can be used to obtain password hashes, this may only get an adversary so far when Pass the Hash is not an option.
+Further,  adversaries may leverage Data from Configuration Repository in order to obtain hashed credentials for network devices.
+Techniques to systematically guess the passwords used to compute hashes are available, or the adversary may use a pre-computed rainbow table to crack hashes.
+Cracking hashes is usually done on adversary-controlled systems outside of the target network.
+The resulting plaintext password resulting from a successfully cracked hash may be used to log into systems, resources, and services in which the account has access.
+Adversaries may compromise a network device’s encryption capability in order to bypass encryption that would otherwise protect data communications.
+Encryption can be used to protect transmitted network traffic to maintain its confidentiality  and integrity .
+Encryption ciphers are used to convert a plaintext message to ciphertext and can be computationally intensive to decipher without the associated decryption key.
+Typically, longer keys increase the cost of cryptanalysis, or decryption without the key.
+Adversaries can compromise and manipulate devices that perform encryption of network traffic.
+For example, through behaviors such as Modify System Image, Reduce Key Space, and Disable Crypto Hardware, an adversary can negatively effect and/or eliminate a device’s ability to securely encrypt network traffic.
+This poses a greater risk of unauthorized disclosure and may help facilitate data manipulation, Credential Access, or Collection efforts.
+Adversaries may abuse netbooting to load an unauthorized network device operating system from a Trivial File Transfer Protocol  server.
+TFTP boot  is commonly used by network administrators to load configuration-controlled network device images from a centralized management server.
+Netbooting is one option in the boot sequence and can be used to centralize, manage, and control device images.
+Adversaries may manipulate the configuration on the network device specifying use of a malicious TFTP server, which may be used in conjunction with Modify System Image to load a modified image on device startup or reset.
+The unauthorized image allows adversaries to modify device configuration, add malicious capabilities to the device, and introduce backdoors to maintain control of the network device while minimizing detection through use of a standard functionality.
+This technique is similar to ROMMONkit and may result in the network device running a modified image.
+Adversaries may sniff network traffic to capture information about an environment, including authentication material passed over the network.
+Network sniffing refers to using the network interface on a system to monitor or capture information sent over a wired or wireless connection.
+An adversary may place a network interface into promiscuous mode to passively access data in transit over the network, or use span ports to capture a larger amount of data.
+Data captured via this technique may include user credentials, especially those sent over an insecure, unencrypted protocol.
+Techniques for name service resolution poisoning, such as LLMNR/NBT-NS Poisoning and SMB Relay, can also be used to capture credentials to websites, proxies, and internal systems by redirecting traffic to an adversary.
+Network sniffing may also reveal configuration details, such as running services, version numbers, and other network characteristics  necessary for subsequent Lateral Movement and/or Defense Evasion activities.
+In cloud-based environments, adversaries may still be able to use traffic mirroring services to sniff network traffic from virtual machines.
+For example, AWS Traffic Mirroring, GCP Packet Mirroring, and Azure vTap allow users to define specified instances to collect traffic from and specified targets to send collected traffic to.
+Often, much of this traffic will be in cleartext due to the use of TLS termination at the load balancer level to reduce the strain of encrypting and decrypting traffic.
+The adversary can then use exfiltration techniques such as Transfer Data to Cloud Account in order to access the sniffed traffic.
+An adversary may attempt to get detailed information about the operating system and hardware, including version, patches, hotfixes, service packs, and architecture.
+Adversaries may use the information from System Information Discovery during automated discovery to shape follow-on behaviors, including whether or not the adversary fully infects the target and/or attempts specific actions.
+Tools such as Systeminfo can be used to gather detailed system information.
+If running with privileged access, a breakdown of system data can be gathered through the <code>
+systemsetup</code> configuration tool on macOS.
+As an example, adversaries with user-level access can execute the <code>df -aH</code> command to obtain currently mounted disks and associated freely available space.
+Adversaries may also leverage a Network Device CLI on network devices to gather detailed system information .
+System Information Discovery combined with information gathered from other forms of discovery and reconnaissance can drive payload development and concealment.
+Infrastructure as a Service  cloud providers such as AWS, GCP, and Azure allow access to instance and virtual machine information via APIs.
+Successful authenticated API calls can return data such as the operating system platform and status of a particular instance or the model view of a virtual machine.
+Adversaries may clear or remove evidence of malicious network connections in order to clean up traces of their operations.
+Configuration settings as well as various artifacts that highlight connection history may be created on a system from behaviors that require network connections, such as Remote Services or External Remote Services.
+Defenders may use these artifacts to monitor or otherwise analyze network connections created by adversaries.
+Network connection history may be stored in various locations on a system.
+For example, RDP connection history may be stored in Windows Registry values under :
+
+* <code>HKEY_CURRENT_USER\Software\Microsoft\Terminal Server Client\Default</code>
+* <code>HKEY_CURRENT_USER\Software\Microsoft\Terminal Server Client\Servers</code>
+
+Windows may also store information about recent RDP connections in files such as <code>
+C:\Users\\%username%\Documents\Default.rdp</code> and `C:\Users\%username%\AppData\Local\Microsoft\Terminal
+Server Client\Cache\`.
+Similarly, macOS and Linux hosts may store information highlighting connection history in system logs .
+Malicious network connections may also require changes to network configuration settings, such as Disable or Modify System Firewall or tampering to enable Proxy.
+Adversaries may delete or modify this data to conceal indicators and/or impede defensive analysis.
+Adversaries may reduce the level of effort required to decrypt data transmitted over the network by reducing the cipher strength of encrypted communications.
+Adversaries can weaken the encryption software on a compromised network device by reducing the key size used by the software to convert plaintext to ciphertext .
+As a result, adversaries dramatically reduce the amount of effort needed to decrypt the protected information without the key.
+Adversaries may modify the key size used and other encryption parameters using specialized commands in a Network Device CLI introduced to the system through Modify System Image to change the configuration of the device.
+In addition to clearing system logs, an adversary may clear the command history of a compromised account to conceal the actions undertaken during an intrusion.
+Various command interpreters keep track of the commands users type in their terminal so that users can retrace what they've done.
+On Linux and macOS, these command histories can be accessed in a few different ways.
+While logged in, this command history is tracked in a file pointed to by the environment variable <code>HISTFILE</code>.
+When a user logs off a system, this information is flushed to a file in the user's home directory called <code>~/.bash_history</code>.
+The benefit of this is that it allows users to go back to commands they've used before in different sessions.
+Adversaries may delete their commands from these logs by manually clearing the history  or deleting the bash history file <code>rm ~/.bash_history</code>.
+Adversaries may also leverage a Network Device CLI on network devices to clear command history data .
+On Windows hosts, PowerShell has two different command history providers: the built-in history and the command history managed by the <code>PSReadLine</code> module.
+The built-in history only tracks the commands used in the current session.
+This command history is not available to other sessions and is deleted when the session ends.
+The <code>PSReadLine</code> command history tracks the commands used in all PowerShell sessions and writes them to a file .
+This history file is available to all sessions and contains all past history since the file is not deleted when the session ends.
+Adversaries may run the PowerShell command <code>Clear-History</code> to flush the entire command history from a current PowerShell session.
+This, however, will not delete/flush the <code>ConsoleHost_history.txt</code> file.
+Adversaries may also delete the <code>ConsoleHost_history.txt</code> file or edit its contents to hide PowerShell commands they have run.
+Adversaries may search local system sources, such as file systems and configuration files or local databases, to find files of interest and sensitive data prior to Exfiltration.
+Adversaries may do this using a Command and Scripting Interpreter, such as cmd as well as a Network Device CLI, which have functionality to interact with the file system to gather information.
+Adversaries may also use Automated Collection on the local system.
+
+Adversaries may maliciously modify components of a victim environment in order to hinder or disable defensive mechanisms.
+This not only involves impairing preventative defenses, such as firewalls and anti-virus, but also detection capabilities that defenders can use to audit activity and identify malicious behavior.
+This may also span both native defenses as well as supplemental capabilities installed by users and administrators.
+Adversaries could also target event aggregation and analysis mechanisms, or otherwise disrupt these procedures by altering other system components.
+Adversaries may attempt to take advantage of a weakness in an Internet-facing computer or program using software, data, or commands in order to cause unintended or unanticipated behavior.
+The weakness in the system can be a bug, a glitch, or a design vulnerability.
+These applications are often websites, but can include databases , standard services , network device administration and management protocols , and any other applications with Internet accessible open sockets, such as web servers and related services.
+Depending on the flaw being exploited this may include Exploitation for Defense Evasion.
+If an application is hosted on cloud-based infrastructure and/or is containerized, then exploiting it may lead to compromise of the underlying instance or container.
+This can allow an adversary a path to access the cloud or container APIs, exploit container host access via Escape to Host, or take advantage of weak identity and access management policies.
+For websites and databases, the OWASP top 10 and CWE top 25 highlight the most common web-based vulnerabilities.
+Adversaries may use traffic signaling to hide open ports or other malicious functionality used for persistence or command and control.
+Traffic signaling involves the use of a magic value or sequence that must be sent to a system to trigger a special response, such as opening a closed port or executing a malicious task.
+This may take the form of sending a series of packets with certain characteristics before a port will be opened that the adversary can use for command and control.
+Usually this series of packets consists of attempted connections to a predefined sequence of closed ports ), but can involve unusual flags, specific strings, or other unique characteristics.
+After the sequence is completed, opening a port may be accomplished by the host-based firewall, but could also be implemented by custom software.
+Adversaries may also communicate with an already open port, but the service listening on that port will only respond to commands or trigger other malicious functionality if passed the appropriate magic value.
+The observation of the signal packets to trigger the communication can be conducted through different methods.
+One means, originally implemented by Cd00r , is to use the libpcap libraries to sniff for the packets in question.
+Another method leverages raw sockets, which enables the malware to use ports that are already open for use by other programs.
+On network devices, adversaries may use crafted packets to enable Network Device Authentication for standard services offered by the device such as telnet.
+Such signaling may also be used to open a closed service port such as telnet, or to trigger module modification of malware implants on the device, adding, removing, or changing malicious capabilities.
+Adversaries may use crafted packets to attempt to connect to one or more  ports, but may also attempt to connect to a router interface, broadcast, and network address IP on the same port in order to achieve their goals and objectives.
+To enable this traffic signaling on embedded devices, adversaries must first achieve and leverage Patch System Image due to the monolithic nature of the architecture.
+Adversaries may also use the Wake-on-LAN feature to turn on powered off systems.
+Wake-on-LAN is a hardware feature that allows a powered down system to be powered on, or woken up, by sending a magic packet to it.
+Once the system is powered on, it may become a target for lateral movement.
+Adversaries may bridge network boundaries by modifying a network device’s Network Address Translation  configuration.
+Malicious modifications to NAT may enable an adversary to bypass restrictions on traffic routing that otherwise separate trusted and untrusted networks.
+Network devices such as routers and firewalls that connect multiple networks together may implement NAT during the process of passing packets between networks.
+When performing NAT, the network device will rewrite the source and/or destination addresses of the IP address header.
+Some network designs require NAT for the packets to cross the border device.
+A typical example of this is environments where internal networks make use of non-Internet routable addresses.
+When an adversary gains control of a network boundary device, they can either leverage existing NAT configurations to send traffic between two separated networks, or they can implement NAT configurations of their own design.
+In the case of network designs that require NAT to function, this enables the adversary to overcome inherent routing limitations that would normally prevent them from accessing protected systems behind the border device.
+In the case of network designs that do not require NAT, address translation can be used by adversaries to obscure their activities, as changing the addresses of packets that traverse a network boundary device can make monitoring data transmissions more challenging for defenders.
+Adversaries may use Patch System Image to change the operating system of a network device, implementing their own custom NAT mechanisms to further obscure their activities
+Adversaries may access network configuration files to collect sensitive data about the device and the network.
+The network configuration is a file containing parameters that determine the operation of the device.
+The device typically stores an in-memory copy of the configuration while operating, and a separate configuration on non-volatile storage to load after device reset.
+Adversaries can inspect the configuration files to reveal information about the target network and its layout, the network device and its software, or identifying legitimate accounts and credentials for later use.
+Adversaries can use common management tools and protocols, such as Simple Network Management Protocol  and Smart Install , to access network configuration files.
+These tools may be used to query specific data from a configuration repository or configure the device to export the configuration for later analysis.
+Adversaries may backdoor web servers with web shells to establish persistent access to systems.
+A Web shell is a Web script that is placed on an openly accessible Web server to allow an adversary to use the Web server as a gateway into a network.
+A Web shell may provide a set of functions to execute or a command-line interface on the system that hosts the Web server.
+In addition to a server-side script, a Web shell may have a client interface program that is used to talk to the Web server  Web shell client).
+Adversaries may look for details about the network configuration and settings, such as IP and/or MAC addresses, of systems they access or through information discovery of remote systems.
+Several operating system administration utilities exist that can be used to gather this information.
+Examples include Arp, ipconfig/ifconfig, nbtstat, and route.
+Adversaries may also leverage a Network Device CLI on network devices to gather information about configurations and settings, such as IP addresses of configured interfaces and static/dynamic routes .
+Adversaries may use the information from System Network Configuration Discovery during automated discovery to shape follow-on behaviors, including determining certain access within the target network and what actions to do next.
+Adversaries may use a connection proxy to direct network traffic between systems or act as an intermediary for network communications to a command and control server to avoid direct connections to their infrastructure.
+Many tools exist that enable traffic redirection through proxies or port redirection, including HTRAN, ZXProxy, and ZXPortMap.
+Adversaries use these types of proxies to manage command and control communications, reduce the number of simultaneous outbound network connections, provide resiliency in the face of connection loss, or to ride over existing trusted communications paths between victims to avoid suspicion.
+Adversaries may chain together multiple proxies to further disguise the source of malicious traffic.
+Adversaries can also take advantage of routing schemes in Content Delivery Networks  to proxy command and control traffic.
+Adversaries may abuse command and script interpreters to execute commands, scripts, or binaries.
+These interfaces and languages provide ways of interacting with computer systems and are a common feature across many different platforms.
+Most systems come with some built-in command-line interface and scripting capabilities, for example, macOS and Linux distributions include some flavor of Unix Shell while Windows installations include the Windows Command Shell and PowerShell.
+There are also cross-platform interpreters such as Python, as well as those commonly associated with client applications such as JavaScript and Visual Basic.
+Adversaries may abuse these technologies in various ways as a means of executing arbitrary commands.
+Commands and scripts can be embedded in Initial Access payloads delivered to victims as lure documents or as secondary payloads downloaded from an existing C2.
+Adversaries may also execute commands through interactive terminals/shells, as well as utilize various Remote Services in order to achieve remote Execution.
+Adversaries may exfiltrate data, such as sensitive documents, through the use of automated processing after being gathered during Collection.
+When automated exfiltration is used, other exfiltration techniques likely apply as well to transfer the information out of the network, such as Exfiltration Over C2 Channel and Exfiltration Over Alternative Protocol.
+Adversaries may delete or modify artifacts generated within systems to remove evidence of their presence or hinder defenses.
+Various artifacts may be created by an adversary or something that can be attributed to an adversary’s actions.
+Typically these artifacts are used as defensive indicators related to monitored events, such as strings from downloaded files, logs that are generated from user actions, and other data analyzed by defenders.
+Location, format, and type of artifact  are often specific to each platform.
+Removal of these indicators may interfere with event collection, reporting, or other processes used to detect intrusion activity.
+This may compromise the integrity of security solutions by causing notable events to go unreported.
+This activity may also impede forensic analysis and incident response, due to lack of sufficient data to determine what occurred.
+Adversaries may enumerate files and directories or may search in specific locations of a host or network share for certain information within a file system.
+Adversaries may use the information from File and Directory Discovery during automated discovery to shape follow-on behaviors, including whether or not the adversary fully infects the target and/or attempts specific actions.
+Many command shell utilities can be used to obtain this information.
+Examples include <code>dir</code>, <code>tree</code>, <code>ls</code>, <code>find</code>, and <code>locate</code>.
+Custom tools may also be used to gather file and directory information and interact with the Native API.
+Adversaries may also leverage a Network Device CLI on network devices to gather file and directory information .
+Adversaries may leverage traffic mirroring in order to automate data exfiltration over compromised network infrastructure.
+Traffic mirroring is a native feature for some network devices and used for network analysis and may be configured to duplicate traffic and forward to one or more destinations for analysis by a network analyzer or other monitoring device.
+Adversaries may abuse traffic mirroring to mirror or redirect network traffic through other network infrastructure they control.
+Malicious modifications to network devices to enable traffic redirection may be possible through ROMMONkit or Patch System Image.
+Adversaries may use traffic duplication in conjunction with Network Sniffing, Input Capture, or Adversary-in-the-Middle depending on the goals and objectives of the adversary.
+Adversaries may attempt to get a listing of network connections to or from the compromised system they are currently accessing or from remote systems by querying for information over the network.
+An adversary who gains access to a system that is part of a cloud-based environment may map out Virtual Private Clouds or Virtual Networks in order to determine what systems and services are connected.
+The actions performed are likely the same types of discovery techniques depending on the operating system, but the resulting information may include details about the networked cloud environment relevant to the adversary's goals.
+Cloud providers may have different ways in which their virtual networks operate.
+Similarly, adversaries who gain access to network devices may also perform similar discovery activities to gather information about connected systems and services.
+Utilities and commands that acquire this information include netstat, "net use," and "net session" with Net.
+In Mac and Linux, netstat and <code>lsof</code> can be used to list current connections.
+<code>who -a</code> and <code>w</code> can be used to show which users are currently logged in, similar to "net session".
+Additionally, built-in features native to network devices and Network Device CLI may be used .
+Adversaries disable a network device’s dedicated hardware encryption, which may enable them to leverage weaknesses in software encryption in order to reduce the effort involved in collecting, manipulating, and exfiltrating transmitted data.
+Many network devices such as routers, switches, and firewalls, perform encryption on network traffic to secure transmission across networks.
+Often, these devices are equipped with special, dedicated encryption hardware to greatly increase the speed of the encryption process as well as to prevent malicious tampering.
+When an adversary takes control of such a device, they may disable the dedicated hardware, for example, through use of Modify System Image, forcing the use of software to perform encryption on general processors.
+This is typically used in conjunction with attacks to weaken the strength of the cipher in software ).
+Adversaries may abuse Pre-OS Boot mechanisms as a way to establish persistence on a system.
+During the booting process of a computer, firmware and various startup services are loaded before the operating system.
+These programs control flow of execution before the operating system takes control.
+Adversaries may overwrite data in boot drivers or firmware such as BIOS  and The Unified Extensible Firmware Interface  to persist on systems at a layer below the operating system.
+This can be particularly difficult to detect as malware at this level will not be detected by host software-based defenses.
+Adversaries may abuse scripting or built-in command line interpreters  on network devices to execute malicious command and payloads.
+The CLI is the primary means through which users and administrators interact with the device in order to view system information, modify device operations, or perform diagnostic and administrative functions.
+CLIs typically contain various permission levels required for different commands.
+Scripting interpreters automate tasks and extend functionality beyond the command set included in the network OS.
+The CLI and scripting interpreter are accessible through a direct console connection, or through remote means, such as telnet or SSH.
+Adversaries can use the network CLI to change how network devices behave and operate.
+The CLI may be used to manipulate traffic flows to intercept or manipulate data, modify startup configuration parameters to load malicious system software, or to disable security features or logging to avoid detection.
+Adversaries may use port knocking to hide open ports used for persistence or command and control.
+To enable a port, an adversary sends a series of attempted connections to a predefined sequence of closed ports.
+After the sequence is completed, opening a port is often accomplished by the host based firewall, but could also be implemented by custom software.
+This technique has been observed both for the dynamic opening of a listening port as well as the initiating of a connection to a listening server on a different system.
+The observation of the signal packets to trigger the communication can be conducted through different methods.
+One means, originally implemented by Cd00r , is to use the libpcap libraries to sniff for the packets in question.
+Another method leverages raw sockets, which enables the malware to use ports that are already open for use by other programs.
+Adversaries may impair command history logging to hide commands they run on a compromised system.
+Various command interpreters keep track of the commands users type in their terminal so that users can retrace what they've done.
+On Linux and macOS, command history is tracked in a file pointed to by the environment variable <code>HISTFILE</code>.
+When a user logs off a system, this information is flushed to a file in the user's home directory called <code>~/.bash_history</code>.
+The <code>HISTCONTROL</code> environment variable keeps track of what should be saved by the <code>history</code> command and eventually into the <code>~/.bash_history</code> file when a user logs out.
+<code>HISTCONTROL</code> does not exist by default on macOS, but can be set by the user and will be respected.
+Adversaries may clear the history environment variable  or set the command history size to zero  to prevent logging of commands.
+Additionally, <code>HISTCONTROL</code> can be configured to ignore commands that start with a space by simply setting it to "ignorespace".
+<code>HISTCONTROL</code> can also be set to ignore duplicate commands by setting it to "ignoredups".
+In some Linux systems, this is set by default to "ignoreboth" which covers both of the previous examples.
+This means that “ ls” will not be saved, but “ls” would be saved by history.
+Adversaries can abuse this to operate without leaving traces by simply prepending a space to all of their terminal commands.
+On Windows systems, the <code>PSReadLine</code> module tracks commands used in all PowerShell sessions and writes them to a file .
+Adversaries may change where these logs are saved using <code>Set-PSReadLineOption -HistorySavePath {File Path}</code>.
+This will cause <code>ConsoleHost_history.txt</code> to stop receiving logs.
+Additionally, it is possible to turn off logging to this file using the PowerShell command <code>Set-PSReadlineOption -HistorySaveStyle SaveNothing</code>.
+Adversaries may also leverage a Network Device CLI on network devices to disable historical command logging .
+Adversaries may abuse the ROM Monitor  by loading an unauthorized firmware with adversary code to provide persistent access and manipulate device behavior that is difficult to detect.
+ROMMON is a Cisco network device firmware that functions as a boot loader, boot image, or boot helper to initialize hardware and software when the platform is powered on or reset.
+Similar to TFTP Boot, an adversary may upgrade the ROMMON image locally or remotely  with adversary code and restart the device in order to overwrite the existing ROMMON image.
+This provides adversaries with the means to update the ROMMON to gain persistence on a system in a way that may be difficult to detect.
+To disguise the source of malicious traffic, adversaries may chain together multiple proxies.
+Typically, a defender will be able to identify the last proxy traffic traversed before it enters their network; the defender may or may not be able to identify any previous proxies before the last-hop proxy.
+This technique makes identifying the original source of the malicious traffic even more difficult by requiring the defender to trace malicious traffic through several proxies to identify its source.
+A particular variant of this behavior is to use onion routing networks, such as the publicly available TOR network.
+In the case of network infrastructure, particularly routers, it is possible for an adversary to leverage multiple compromised devices to create a multi-hop proxy chain within the Wide-Area Network  of the enterprise.
+By leveraging Patch System Image, adversaries can add custom code to the affected network devices that will implement onion routing between those nodes.
+This custom onion routing network will transport the encrypted C2 traffic through the compromised population, allowing adversaries to communicate with any device within the onion routing network.
+This method is dependent upon the Network Boundary Bridging method in order to allow the adversaries to cross the protected network boundary of the Internet perimeter and into the organization’s WAN.
+Protocols such as ICMP may be used as a transport.
+Adversaries may use brute force techniques to gain access to accounts when passwords are unknown or when password hashes are obtained.
+Without knowledge of the password for an account or set of accounts, an adversary may systematically guess the password using a repetitive or iterative mechanism.
+Brute forcing passwords can take place via interaction with a service that will check the validity of those credentials or offline against previously acquired credential data, such as password hashes.
+Brute forcing credentials may take place at various points during a breach.
+For example, adversaries may attempt to brute force access to Valid Accounts within a victim environment leveraging knowledge gathered from other post-compromise behaviors such as OS Credential Dumping, Account Discovery, or Password Policy Discovery.
+Adversaries may also combine brute forcing activity with behaviors such as External Remote Services as part of Initial Access.
+Adversaries may make changes to the operating system of embedded network devices to weaken defenses and provide new capabilities for themselves.
+On such devices, the operating systems are typically monolithic and most of the device functionality and capabilities are contained within a single file.
+To change the operating system, the adversary typically only needs to affect this one file, replacing or modifying it.
+This can either be done live in memory during system runtime for immediate effect, or in storage to implement the change on the next boot of the network device.
+Adversaries may obtain and abuse credentials of existing accounts as a means of gaining Initial Access, Persistence, Privilege Escalation, or Defense Evasion.
+Compromised credentials may be used to bypass access controls placed on various resources on systems within the network and may even be used for persistent access to remote systems and externally available services, such as VPNs, Outlook Web Access, network devices, and remote desktop.
+Compromised credentials may also grant an adversary increased privilege to specific systems or access to restricted areas of the network.
+Adversaries may choose not to use malware or tools in conjunction with the legitimate access those credentials provide to make it harder to detect their presence.
+In some cases, adversaries may abuse inactive accounts: for example, those belonging to individuals who are no longer part of an organization.
+Using these accounts may allow the adversary to evade detection, as the original account user will not be present to identify any anomalous activity taking place on their account.
+The overlap of permissions for local, domain, and cloud accounts across a network of systems is of concern because the adversary may be able to pivot across accounts and systems to reach a high level of access  to bypass access controls set within the enterprise.
+Adversaries may attempt to access detailed information about the password policy used within an enterprise network or cloud environment.
+Password policies are a way to enforce complex passwords that are difficult to guess or crack through Brute Force.
+This information may help the adversary to create a list of common passwords and launch dictionary and/or brute force attacks which adheres to the policy .
+Password policies can be set and discovered on Windows, Linux, and macOS systems via various command shell utilities such as <code>net accounts </code>, <code>
+Get-ADDefaultDomainPasswordPolicy</code>, <code>chage -l <username></code>, <code>cat /etc/pam.d/common-password</code>, and <code>pwpolicy getaccountpolicies</code>  .
+Adversaries may also leverage a Network Device CLI on network devices to discover password policy information .
+Password policies can be discovered in cloud environments using available APIs such as <code>GetAccountPasswordPolicy</code> in AWS .
+Adversaries may bridge network boundaries by compromising perimeter network devices or internal devices responsible for network segmentation.
+Breaching these devices may enable an adversary to bypass restrictions on traffic routing that otherwise separate trusted and untrusted networks.
+Devices such as routers and firewalls can be used to create boundaries between trusted and untrusted networks.
+They achieve this by restricting traffic types to enforce organizational policy in an attempt to reduce the risk inherent in such connections.
+Restriction of traffic can be achieved by prohibiting IP addresses, layer 4 protocol ports, or through deep packet inspection to identify applications.
+To participate with the rest of the network, these devices can be directly addressable or transparent, but their mode of operation has no bearing on how the adversary can bypass them when compromised.
+When an adversary takes control of such a boundary device, they can bypass its policy enforcement to pass normally prohibited traffic across the trust boundary between the two separated networks without hinderance.
+By achieving sufficient rights on the device, an adversary can reconfigure the device to allow the traffic they want, allowing them to then further achieve goals such as command and control via Multi-hop Proxy or exfiltration of data via Traffic Duplication.
+Adversaries may also target internal devices responsible for network segmentation and abuse these in conjunction with Internal Proxy to achieve the same goals.
+In the cases where a border device separates two separate organizations, the adversary can also facilitate lateral movement into new victim environments.
+Adversaries may use methods of capturing user input to obtain credentials or collect information.
+During normal system usage, users often provide credentials to various different locations, such as login pages/portals or system dialog boxes.
+Input capture mechanisms may be transparent to the user ) or rely on deceiving the user into providing input into what they believe to be a genuine service ).
+Adversaries may use a non-application layer protocol for communication between host and C2 server or among infected hosts within a network.
+The list of possible protocols is extensive.
+Specific examples include use of network layer protocols, such as the Internet Control Message Protocol , transport layer protocols, such as the User Datagram Protocol , session layer protocols, such as Socket Secure , as well as redirected/tunneled protocols, such as Serial over LAN .
+ICMP communication between hosts is one example.
+Because ICMP is part of the Internet Protocol Suite, it is required to be implemented by all IP-compatible hosts.
+However, it is not as commonly monitored as other Internet Protocols such as TCP or UDP and may be used by adversaries to hide communications.
+Adversaries may modify the operating system of a network device to introduce new capabilities or weaken existing defenses.
+Some network devices are built with a monolithic architecture, where the entire operating system and most of the functionality of the device is contained within a single file.
+Adversaries may change this file in storage, to be loaded in a future boot, or in memory during runtime.
+To change the operating system in storage, the adversary will typically use the standard procedures available to device operators.
+This may involve downloading a new file via typical protocols used on network devices, such as TFTP, FTP, SCP, or a console connection.
+The original file may be overwritten, or a new file may be written alongside of it and the device reconfigured to boot to the compromised image.
+To change the operating system in memory, the adversary typically can use one of two methods.
+In the first, the adversary would make use of native debug commands in the original, unaltered running operating system that allow them to directly modify the relevant memory addresses containing the running operating system.
+This method typically requires administrative level access to the device.
+In the second method for changing the operating system in memory, the adversary would make use of the boot loader.
+The boot loader is the first piece of software that loads when the device starts that, in turn, will launch the operating system.
+Adversaries may use malicious code previously implanted in the boot loader, such as through the ROMMONkit method, to directly manipulate running operating system code in memory.
+This malicious code in the bootloader provides the capability of direct memory manipulation to the adversary, allowing them to patch the live operating system during runtime.
+By modifying the instructions stored in the system image file, adversaries may either weaken existing defenses or provision new capabilities that the device did not have before.
+Examples of existing defenses that can be impeded include encryption, via Weaken Encryption, authentication, via Network Device Authentication, and perimeter defenses, via Network Boundary Bridging.
+Adding new capabilities for the adversary’s purpose include Keylogging, Multi-hop Proxy, and Port Knocking.
+Adversaries may also compromise existing commands in the operating system to produce false output to mislead defenders.
+When this method is used in conjunction with Downgrade System Image, one example of a compromised system command may include changing the output of the command that shows the version of the currently running operating system.
+By patching the operating system, the adversary can change this command to instead display the original, higher revision number that they replaced through the system downgrade.
+When the operating system is patched in storage, this can be achieved in either the resident storage  or via TFTP Boot.
+When the technique is performed on the running operating system in memory and not on the stored copy, this technique will not survive across reboots.
+However, live memory modification of the operating system can be combined with ROMMONkit to achieve persistence.
+Adversaries may abuse legitimate extensible development features of servers to establish persistent access to systems.
+Enterprise server applications may include features that allow developers to write and install software or scripts to extend the functionality of the main application.
+Adversaries may install malicious components to extend and abuse server applications.
+Adversaries may attempt to get a listing of other systems by IP address, hostname, or other logical identifier on a network that may be used for Lateral Movement from the current system.
+Functionality could exist within remote access tools to enable this, but utilities available on the operating system could also be used such as  Ping or <code>net view</code> using Net.
+Adversaries may also analyze data from local host files  or other passive means  cache entries) in order to discover the presence of remote systems in an environment.
+Adversaries may also target discovery of network infrastructure as well as leverage Network Device CLI commands on network devices to gather detailed information about systems within a network .
+
+Adversaries may attempt to get a listing of services running on remote hosts and local network infrastructure devices, including those that may be vulnerable to remote software exploitation.
+Common methods to acquire this information include port and/or vulnerability scans using tools that are brought onto a system.
+Within cloud environments, adversaries may attempt to discover services running on other cloud hosts.
+Additionally, if the cloud environment is connected to a on-premises environment, adversaries may be able to identify services running on non-cloud systems as well.
+Within macOS environments, adversaries may use the native Bonjour application to discover services running on other macOS hosts within a network.
+The Bonjour mDNSResponder daemon automatically registers and advertises a host’s registered services on the network.
+For example, adversaries can use a mDNS query  to find other systems broadcasting the ssh service.
+Adversaries may target the Management Information Base  to collect and/or mine valuable information in a network managed using Simple Network Management Protocol .
+The MIB is a configuration repository that stores variable information accessible via SNMP in the form of object identifiers .
+Each OID identifies a variable that can be read or set and permits active management tasks, such as configuration changes, through remote modification of these variables.
+SNMP can give administrators great insight in their systems, such as, system information, description of hardware, physical location, and software packages.
+The MIB may also contain device operational information, including running configuration, routing table, and interface details.
+Adversaries may use SNMP queries to collect MIB content directly from SNMP-managed devices in order to collect network information that allows the adversary to build network maps and facilitate future targeted exploitation.
+Adversaries may modify authentication mechanisms and processes to access user credentials or enable otherwise unwarranted access to accounts.
+The authentication process is handled by mechanisms, such as the Local Security Authentication Server  process and the Security Accounts Manager  on Windows, pluggable authentication modules  on Unix-based systems, and authorization plugins on MacOS systems, responsible for gathering, storing, and validating credentials.
+By modifying an authentication process, an adversary may be able to authenticate to a service or system without using Valid Accounts.
+Adversaries may maliciously modify a part of this process to either reveal credentials or bypass authentication mechanisms.
+Compromised credentials or access may be used to bypass access controls placed on various resources on systems within the network and may even be used for persistent access to remote systems and externally available services, such as VPNs, Outlook Web Access and remote desktop.
+Adversaries may overwrite or corrupt the flash memory contents of system BIOS or other firmware in devices attached to a system in order to render them inoperable or unable to boot, thus denying the availability to use the devices and/or the system.
+Firmware is software that is loaded and executed from non-volatile memory on hardware devices in order to initialize and manage device functionality.
+These devices may include the motherboard, hard drive, or video cards.
+In general, adversaries may manipulate, overwrite, or corrupt firmware in order to deny the use of the system or devices.
+For example, corruption of firmware responsible for loading the operating system for network devices may render the network devices inoperable.
+Depending on the device, this attack may also result in Data Destruction.
+Adversaries may use Patch System Image to hard code a password in the operating system, thus bypassing of native authentication mechanisms for local accounts on network devices.
+Modify System Image may include implanted code to the operating system for network devices to provide access for adversaries using a specific password.
+The modification includes a specific password which is implanted in the operating system image via the patch.
+Upon authentication attempts, the inserted code will first check to see if the user input is the password.
+If so, access is granted.
+Otherwise, the implanted code will pass the credentials on for verification of potentially valid credentials.
+Adversaries may install an older version of the operating system of a network device to weaken security.
+Older operating system versions on network devices often have weaker encryption ciphers and, in general, fewer/less updated defensive features.
+On embedded devices, downgrading the version typically only requires replacing the operating system file in storage.
+With most embedded devices, this can be achieved by downloading a copy of the desired version of the operating system file and reconfiguring the device to boot from that file on next system restart.
+The adversary could then restart the device to implement the change immediately or they could wait until the next time the system restarts.
+Downgrading the system image to an older versions may allow an adversary to evade defenses by enabling behaviors such as Weaken Encryption.
+Downgrading of a system image can be done on its own, or it can be used in conjunction with Patch System Image.
+
+Adversaries may shutdown/reboot systems to interrupt access to, or aid in the destruction of, those systems.
+Operating systems may contain commands to initiate a shutdown/reboot of a machine or network device.
+In some cases, these commands may also be used to initiate a shutdown/reboot of a remote computer or network device via Network Device CLI .
+Shutting down or rebooting systems may disrupt access to computer resources for legitimate users.
+Adversaries may attempt to shutdown/reboot a system after impacting it in other ways, such as Disk Structure Wipe or Inhibit System Recovery, to hasten the intended effects on system availability.
