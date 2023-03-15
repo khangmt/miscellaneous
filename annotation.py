@@ -130,8 +130,13 @@ num_tags = len(uniques)
 data_dict["tag2id"] = tag2id
 data_dict["id2tag"] = id2tag
 data_dict["num_tags"] = num_tags
-print(data_dict)
+# print(data_dict)
 with open("mapper.pickle", "wb") as f:
     pickle.dump(data_dict,f,protocol= pickle.HIGHEST_PROTOCOL)
+
+with open("mapper.pickle", "rb") as f:
+    mapper = pickle.load(f)
+
+print(mapper)
 
 # # %%
