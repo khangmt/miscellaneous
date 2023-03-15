@@ -40,8 +40,9 @@ with codecs.open(file_path, "r", encoding="utf-8") as f:
     data = json.load(f)
 data = data["annotations"]
 annotation_data = list()
-item = dict()
+
 for d in data:
+    item = dict()
     if d is None:
         continue
     text, annot = d
@@ -53,30 +54,36 @@ for d in data:
     for start, end, label in annot["entities"]:
         span = doc.char_span(start, end, label=label)
         if span is None:
-            print(start,end, label)
+            # print(start,end, label)
             continue
         spans.append(span)
-    print(text)
+        # if label == "USER":
+        #     print(spans)
     # print(spans)
     doc.set_ents(spans)
     tokens = list()
     labels = list()
     for token in doc:
         tokens.append(token.text)
-        if (token.ent_type_== "O"):
+        if (token.ent_iob_== "O"):
             labels.append("O")
         else:
-            labels.append(token.ent_iob_+"-"+token.ent_type_)
+            new_label = token.ent_iob_+"-"+token.ent_type_
+            #     print(token.text, token.ent_iob_, token.ent_type_)
+            labels.append(new_label)
+        # print(token.text, token.ent_iob_, token.ent_type_)
     item["tokens"]= tokens
     item["labels"]= labels
-    # print(item)
+    # if "users" in item["sentence"]:
+    #     print(item["labels"])
+    #     print(item["sentence"])
     annotation_data.append(item)
 
 file_save = "Threat_ner_v1.json"
 with codecs.open(file_save,"w", encoding="utf-8") as f:
-    json.dump(annotation_data, f)
+    json.dump(annotation_data, f,indent=4)
 
-# %%
+#%%
 import json
 import codecs
 import random
@@ -99,3 +106,32 @@ with codecs.open(save_names[1], "w", encoding= "utf-8") as f:
 with codecs.open(save_names[2], "w", encoding= "utf-8") as f:
     json.dump(dataset["test_data"],f)
 # %%
+import json
+import codecs
+import random
+import math
+import pickle
+file_path = "Threat_ner_v1.json"
+with codecs.open(file_path, "r", encoding="utf-8") as f:
+    data = json.load(f)
+uniques = list()
+for d in data:
+    for label in d["labels"]:
+        if label not in uniques:
+            uniques.append(label)
+if "I-ACTOR" not in uniques:
+    uniques.append("I-ACTOR")
+if "I-USER" not in uniques:
+    uniques.append("I-USER")
+data_dict = dict()
+tag2id = {v:k for k,v in enumerate(uniques)}
+id2tag = {k:v for k,v in enumerate(uniques)}
+num_tags = len(uniques)
+data_dict["tag2id"] = tag2id
+data_dict["id2tag"] = id2tag
+data_dict["num_tags"] = num_tags
+print(data_dict)
+# with open("mapper.pickle", "wb") as f:
+#     pickle.dump(data_dict,f,protocol= pickle.HIGHEST_PROTOCOL)
+
+# # %%
