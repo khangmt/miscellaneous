@@ -100,11 +100,11 @@ dataset["dev_data"] = data[offset1:offset2]
 dataset["test_data"] = data[offset2: len(data)]
 save_names = ["train.json", "dev.json", "test.json"]
 with codecs.open(save_names[0], "w", encoding= "utf-8") as f:
-    json.dump(dataset["train_data"],f)
+    json.dump(dataset["train_data"],f, ensure_ascii=False)
 with codecs.open(save_names[1], "w", encoding= "utf-8") as f:
-    json.dump(dataset["dev_data"],f)
+    json.dump(dataset["dev_data"],f, ensure_ascii=False)
 with codecs.open(save_names[2], "w", encoding= "utf-8") as f:
-    json.dump(dataset["test_data"],f)
+    json.dump(dataset["test_data"],f, ensure_ascii=False)
 # %%
 import json
 import codecs
