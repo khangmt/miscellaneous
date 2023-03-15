@@ -77,3 +77,25 @@ with codecs.open(file_save,"w", encoding="utf-8") as f:
     json.dump(annotation_data, f)
 
 # %%
+import json
+import codecs
+import random
+import math
+file_path = "Threat_ner_v1.json"
+with codecs.open(file_path, "r", encoding="utf-8") as f:
+    data = json.load(f)
+random.shuffle(data)
+offset1 = math.floor(0.8 * len(data))
+offset2 = math.floor(0.9* len(data))
+dataset = dict()
+dataset["train_data"]= data[0:offset1]
+dataset["dev_data"] = data[offset1:offset2]
+dataset["test_data"] = data[offset2: len(data)]
+save_names = ["train.json", "dev.json", "test.json"]
+with codecs.open(save_names[0], "w", encoding= "utf-8") as f:
+    json.dump(dataset["train_data"],f)
+with codecs.open(save_names[1], "w", encoding= "utf-8") as f:
+    json.dump(dataset["dev_data"],f)
+with codecs.open(save_names[2], "w", encoding= "utf-8") as f:
+    json.dump(dataset["test_data"],f)
+# %%
